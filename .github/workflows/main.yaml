@@ -3,31 +3,25 @@ name: Deploy to Surge
 on:
   push:
     branches:
-      
-- main
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      
-name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      
-name: Setup Node
-      uses: actions/setup-node@v4
-      with:
-        node-version: "20"
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
 
-      
-name: Install Surge
-      run: npm install -g surge
+      - name: Install Surge
+        run: npm install -g surge
 
-      
-name: Deploy to Surge
-      env:
-        SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-        SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-      run: surge --project . --domain GabrielReadPrimerparcial.surge.sh
+      - name: Deploy to Surge
+        run: surge ./ primerparcial-gabriel-read.surge.sh
+        env:
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
