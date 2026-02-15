@@ -12,18 +12,22 @@ jobs:
 
     steps:
       
-uses: actions/checkout@v4
+name: Checkout
+      uses: actions/checkout@v4
 
       
-uses: actions/setup-node@v4
+name: Setup Node
+      uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        node-version: "20"
 
       
-run: npm install -g surge
+name: Install Surge
+      run: npm install -g surge
 
       
-run: surge --project . --domain GabrielReadPrimerparcial1.surge.sh
+name: Deploy to Surge
       env:
         SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
         SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+      run: surge --project . --domain GabrielReadPrimerparcial.surge.sh
